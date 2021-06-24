@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import Landing from "./Components/landing";
+import Top from "./Components/top";
 
 class App extends React.Component {
   render() {
     return (
       <div>
-        <Landing />
+        <Top />
       </div>
     );
   }
