@@ -1,5 +1,6 @@
 import * as React from "react";
 import {fetchMainPosts} from "../utils/api"
+import Loading from "./loading"
 
 
 
@@ -45,13 +46,11 @@ export default class Top extends React.Component{
   const {posts, loading} = this.state
     return (
       <div>
-      { loading === false &&
+      { loading === true ? <Loading speed={250}/> :
         <ul>
           {posts.map((post) =>
             <li key={post.url} >
             <h4>{post.title}</h4>
-            
-
             </li>
             )}
         </ul>
