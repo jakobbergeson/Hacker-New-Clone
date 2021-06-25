@@ -16,4 +16,8 @@ html, body, #app {
     list-style-type: none;
   }
 
-
+  .link {
+    color: rgb(187, 46, 31);
+    text-decoration: none;
+    font-weight: bold;
+  }
