@@ -1,6 +1,7 @@
 import * as React from "react";
 import {fetchMainPosts} from "../utils/api"
 import Loading from "./loading"
+import Title from "./title"
 
 
 
@@ -44,19 +45,20 @@ export default class Top extends React.Component{
   }
   render() {
   const {posts, loading} = this.state
-    return (
-      <div>
-      { loading === true ? <Loading speed={250}/> :
-        <ul>
-          {posts.map((post) =>
-            <li key={post.url} >
-            <h4>{post.title}</h4>
-            </li>
-            )}
-        </ul>
-        }
-      </div>
-    )
+  console.log(posts)
+  return (
+    <div>
+    { loading === true ? <Loading speed={250}/> :
+      <ul>
+        {posts.map((post,index) =>
+          <li key={index} >
+          <Title title={post.title} url={post.url}/>
+          </li>
+          )}
+      </ul>
+      }
+    </div>
+  )
   }
 }
 
