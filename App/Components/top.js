@@ -2,6 +2,7 @@ import * as React from "react";
 import {fetchMainPosts} from "../utils/api"
 import Loading from "./loading"
 import Title from "./title"
+import PropTypes from 'prop-types';
 
 
 
@@ -21,7 +22,6 @@ export default class Top extends React.Component{
 
   componentDidMount(){
     this.handleFetch()
-
   }
   
   handleFetch(){
@@ -43,9 +43,9 @@ export default class Top extends React.Component{
     }))
     
   }
+
   render() {
   const {posts, loading} = this.state
-  console.log(posts)
   return (
     <div>
     { loading === true ? <Loading speed={250}/> :
@@ -62,3 +62,6 @@ export default class Top extends React.Component{
   }
 }
 
+Top.propTypes = {
+  type: PropTypes.string.isRequired
+}
