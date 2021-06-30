@@ -1,7 +1,10 @@
 import * as React from "react";
 import queryString from "query-string";
 import Loading from "./loading";
+import Title from "./title";
+import MetaData from "./metaData";
 import { fetchUser, fetchPosts } from "../utils/api";
+import { formatDate } from "../utils/time";
 
 export default class User extends React.Component {
   constructor(props) {
@@ -26,7 +29,7 @@ export default class User extends React.Component {
       .then((posts) =>
         this.setState({
           posts,
-          loadingPosts: false,
+          postsLoading: false,
           error: null,
         })
       )
@@ -41,9 +44,42 @@ export default class User extends React.Component {
 
   render() {
     const { userLoading, user, posts, postsLoading, error } = this.state;
+    console.log(user);
+    console.log(posts);
+
     return (
       <React.Fragment>
-        {userLoading ? <Loading text="Loading User" /> : <h1>{user.id}</h1>}
+        {userLoading ? (
+          <Loading text="Loading User" />
+        ) : (
+          <div className="meta-data">
+            <h1>{user.id}</h1>
+            <span>
+              joined <strong>{formatDate(user.created)}</strong>{" "}
+            </span>
+            <span>
+              has <strong>{user.karma}</strong> karma
+            </span>
+          </div>
+        )}
+        <h2>Posts</h2>
+        {postsLoading ? (
+          <Loading text="Loading Posts" />
+        ) : (
+          <ul>
+            {posts.map((post, index) => (
+              <li key={index} className="post">
+                <Title title={post.title} url={post.url} />
+                <MetaData
+                  by={post.by}
+                  time={post.time}
+                  descendants={post.descendants}
+                  id={post.id}
+                />
+              </li>
+            ))}
+          </ul>
+        )}
       </React.Fragment>
     );
   }

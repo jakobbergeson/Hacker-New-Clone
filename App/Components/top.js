@@ -49,13 +49,13 @@ export default class Top extends React.Component {
     console.log(posts);
     return (
       <div>
-        {loading === true ? (
+        {loading ? (
           <Loading speed={250} />
         ) : (
           <ul>
             {posts.map((post, index) => (
-              <li key={index}>
-                <Title title={post.title} url={post.url} />
+              <li key={index} className="post">
+                <Title title={post.title} url={post.url} id={post.id} />
                 <MetaData
                   by={post.by}
                   time={post.time}
