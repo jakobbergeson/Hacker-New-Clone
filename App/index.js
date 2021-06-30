@@ -1,14 +1,25 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./index.css";
-import Top from "./Components/top";
+import Loading from "./Components/loading";
+
+const Top = React.lazy(() => import("./Components/top"));
+const User = React.lazy(() => import("./Components/user"));
 
 class App extends React.Component {
   render() {
     return (
-      <div>
-        <Top type="top"/>
-      </div>
+      <Router>
+        <div>
+          <React.Suspense fallback={<Loading />}>
+            <Switch>
+              <Route exact path="/" render={() => <Top type="top" />} />
+              <Route path="/user" component={User} />
+            </Switch>
+          </React.Suspense>
+        </div>
+      </Router>
     );
   }
 }
