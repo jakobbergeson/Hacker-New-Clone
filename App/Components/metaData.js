@@ -1,16 +1,17 @@
 import * as React from "react";
 import { formatDate } from "../utils/time";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 export default function MetaData({ by, time, descendants, id }) {
   return (
     <div className="meta-data">
       <span>
-        by <a href={`/user?id=${by}`}>{by}</a>
+        by <Link to={`/user?id=${by}`}>{by}</Link>
       </span>
       <span>at {formatDate(time)}</span>
       <span>
-        with <a href={`/post?id=${id}`}>{descendants}</a> comments
+        with <Link to={`/post?id=${id}`}>{descendants}</Link> comments
       </span>
     </div>
   );
