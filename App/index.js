@@ -11,7 +11,7 @@ class App extends React.Component {
   render() {
     return (
       <Router>
-        <div>
+        <div className="container">
           <React.Suspense fallback={<Loading />}>
             <Switch>
               <Route exact path="/" render={() => <Top type="top" />} />
