@@ -5,7 +5,7 @@ import Title from "./title";
 import MetaData from "./metaData";
 import PropTypes from "prop-types";
 
-export default class Top extends React.Component {
+export default class PostList extends React.Component {
   constructor(props) {
     super(props);
 
@@ -19,6 +19,12 @@ export default class Top extends React.Component {
 
   componentDidMount() {
     this.handleFetch();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.type !== this.props.type) {
+      this.handleFetch();
+    }
   }
 
   handleFetch() {
@@ -46,7 +52,6 @@ export default class Top extends React.Component {
 
   render() {
     const { posts, loading } = this.state;
-    console.log(posts);
     return (
       <div>
         {loading ? (
@@ -71,6 +76,6 @@ export default class Top extends React.Component {
   }
 }
 
-Top.propTypes = {
+PostList.propTypes = {
   type: PropTypes.string.isRequired,
 };
