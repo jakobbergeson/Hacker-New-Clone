@@ -3,6 +3,7 @@ import queryString from "query-string";
 import Loading from "./loading";
 import Title from "./title";
 import MetaData from "./metaData";
+import Comments from "./comments";
 import { fetchPosts, fetchItem, fetchComments } from "../utils/api";
 
 export default class Post extends React.Component {
@@ -20,10 +21,19 @@ export default class Post extends React.Component {
     const { id } = queryString.parse(this.props.location.search);
 
     fetchItem(id)
-      .then((post) =>
+      .then((post) => {
         this.setState({
           post,
           postLoading: false,
+          error: null,
+        });
+
+        return fetchComments(post.kids || []);
+      })
+      .then((comments) =>
+        this.setState({
+          comments,
+          commentsLoading: false,
           error: null,
         })
       )
@@ -31,20 +41,24 @@ export default class Post extends React.Component {
         this.setState({
           error: message,
           postLoading: false,
+          commentsLoading: false,
         })
       );
   }
 
   render() {
     const { postLoading, post, comments, commentsLoading, error } = this.state;
-    console.log("Post :", post);
+
+    if (error) {
+      return <p>{error}</p>;
+    }
 
     return (
       <React.Fragment>
         {postLoading ? (
           <Loading text="Loading Post" />
         ) : (
-          <div>
+          <React.Fragment>
             <h1>
               <Title title={post.title} url={post.url} id={post.id} />
             </h1>
@@ -54,12 +68,13 @@ export default class Post extends React.Component {
               descendants={post.descendants}
               id={post.id}
             />
-          </div>
+            <p dangerouslySetInnerHTML={{ __html: post.text }} />
+          </React.Fragment>
         )}
         {commentsLoading ? (
           <Loading text="Loading Comments" />
         ) : (
-          <h3>Commments Loaded!</h3>
+          <Comments comments={comments} />
         )}
       </React.Fragment>
     );

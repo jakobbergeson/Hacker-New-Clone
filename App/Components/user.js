@@ -44,8 +44,9 @@ export default class User extends React.Component {
 
   render() {
     const { userLoading, user, posts, postsLoading, error } = this.state;
-    console.log("user: ", user);
-    console.log("posts :", posts);
+    if (error) {
+      return <p>{error}</p>;
+    }
 
     return (
       <React.Fragment>
