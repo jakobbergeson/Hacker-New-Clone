@@ -1,23 +1,23 @@
 import * as React from "react";
 
 const styles = {
-    content: {
-      fontSize: "35px",
-      position: "absolute",
-      left: "0",
-      right: "0",
-      marginTop: "20px",
-      textAlign: "center",
-    }
-  }
+  content: {
+    fontSize: "35px",
+    position: "absolute",
+    left: "0",
+    right: "0",
+    marginTop: "20px",
+    textAlign: "center",
+  },
+};
 
 export default class Loading extends React.Component {
-    constructor(props){
-        super(props)
-        this.state = {
-          content: this.props.text,
-        };
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      content: this.props.text,
+    };
+  }
   componentDidMount() {
     const { speed, text } = this.props;
 
@@ -35,7 +35,7 @@ export default class Loading extends React.Component {
   }
 
   render() {
-    return <p styles={styles.content}>{this.state.content}</p>;
+    return <h2 styles={styles.content}>{this.state.content}</h2>;
   }
 }
 
