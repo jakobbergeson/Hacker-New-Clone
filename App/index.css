@@ -19,8 +19,14 @@ li {
   list-style-type: none;
 }
 
-.link {
+.link-light {
   color: rgb(187, 46, 31);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.link-dark {
+  color: #bebebe;
   text-decoration: none;
   font-weight: bold;
 }
@@ -36,14 +42,24 @@ li {
   margin-right: 10px;
 }
 
-.meta-data span {
+.meta-data-light span {
   margin: 10px 0;
   margin-right: 6px;
   color: grey;
 }
 
-.meta-data a {
+.meta-data-light a {
   color: black;
+}
+
+.meta-data-dark span {
+  margin: 10px 0;
+  margin-right: 6px;
+  color: grey;
+}
+
+.meta-data-dark a {
+  color: #bebebe;
 }
 
 .container {
@@ -70,4 +86,20 @@ li {
 .row {
   display: flex;
   flex-direction: row;
+}
+
+.dark {
+  color: #dadada;
+  background: #1c2022;
+  min-height: 100%;
+}
+
+.bg-dark {
+  background: rgb(36, 40, 42);
+  border-radius: 3px;
+}
+
+.btn-clear {
+  border: none;
+  background: transparent;
 }
